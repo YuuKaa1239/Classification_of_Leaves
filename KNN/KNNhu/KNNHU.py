@@ -16,9 +16,9 @@ from sklearn.model_selection import KFold
 # Thiết lập mã hóa
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
-
+# os.chdir("KNN/KNNhu")
 # Bước 1: Tải dataset từ file CSV
-dataset = pd.read_csv(r'E:/Downloads/DATA/Hu/hutest_hsv/HUnhom11Std.csv')
+dataset = pd.read_csv("Hu\hutest_hsv\HUnhom11Std.csv")
 
 # Hiển thị số mẫu dữ liệu tương ứng với từng nhãn
 print(dataset.groupby('label').size())
@@ -41,6 +41,7 @@ k_values = [1, 3, 5, 7]
 results = []
 
 # Bước 3 vòng lặp qua các giá trị K
+os.chdir("KNN/KNNhu")
 for k in k_values:
     print(f"\nThử nghiệm với K = {k}")
 

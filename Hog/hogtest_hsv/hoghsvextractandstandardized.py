@@ -55,20 +55,25 @@ def standardize_features(input_csv, output_csv):
     # Lưu dữ liệu đã chuẩn hóa vào tệp CSV mới
     df.to_csv(output_csv, index=False)
 
-# Đường dẫn ảnh đầu vào và lưu lại ảnh xám
-output_gray_folder = r'E:/Downloads/DATA/Hog/gray_images'  # Thư mục lưu ảnh xám
-la_chi, nhanlachi = extract_hog_features_from_folder(       r"E:/Downloads/DATA/LEAF/THAIDUCTOAN/tu_kinh", 1, output_gray_folder=output_gray_folder)                  #lachi
-la_cham, nhanlacham = extract_hog_features_from_folder(     r"E:/Downloads/DATA/LEAF/TRANTHANHKHOA/la_cham", 2, output_gray_folder=output_gray_folder)     #lacham
-la_phong, nhanlaphong = extract_hog_features_from_folder(   r"E:/Downloads/DATA/LEAF/MAIDUCKHIEM/la_phong", 3, output_gray_folder=output_gray_folder)                    #laphong
-la_tao, nhanlatao = extract_hog_features_from_folder(       r"E:/Downloads/DATA/LEAF/NGOHUUMINH/rau_ma", 4, output_gray_folder=output_gray_folder)                                       #la tao
-rau_muong, nhanraumuong = extract_hog_features_from_folder( r"E:/Downloads/DATA/LEAF/NGUYENTHANHLAN/rau muong", 5, output_gray_folder=output_gray_folder)                                #rau muong
+def save_data():
+    # Đường dẫn ảnh đầu vào và lưu lại ảnh xám
+    os.chdir("Hog")
+    output_gray_folder = 'gray_images'  # Thư mục lưu ảnh xám
+    la_tu_kinh, nhanlatukinh = extract_hog_features_from_folder("../LEAF/THAIDUCTOAN/tu_kinh", 1, output_gray_folder=output_gray_folder)                  #lachi
+    la_cham, nhanlacham = extract_hog_features_from_folder("../LEAF/TRANTHANHKHOA/la_cham", 2, output_gray_folder=output_gray_folder)     #lacham
+    la_phong, nhanlaphong = extract_hog_features_from_folder("../LEAF/MAIDUCKHIEM/la_phong", 3, output_gray_folder=output_gray_folder)                    #laphong
+    la_rau_ma, nhanlarauma = extract_hog_features_from_folder("../LEAF/NGOHUUMINH/rau_ma", 4, output_gray_folder=output_gray_folder)                                       #la tao
+    rau_muong, nhanraumuong = extract_hog_features_from_folder("../LEAF/NGUYENTHANHLAN/rau muong", 5, output_gray_folder=output_gray_folder)                                #rau muong
 
-# Lưu vào file csv
-features = la_chi + la_cham + la_phong + la_tao + rau_muong
-labels = nhanlachi + nhanlacham + nhanlaphong + nhanlatao + nhanraumuong
-save_to_csv(features, labels, r'E:/Downloads/DATA/Hog/hogtest_hsv/HOGnhom11.csv')
+    os.chdir("hogtest_hsv")
+    # Lưu vào file csv
+    features = la_tu_kinh + la_cham + la_phong + la_rau_ma + rau_muong
+    labels = nhanlatukinh + nhanlacham + nhanlaphong + nhanlarauma + nhanraumuong
+    save_to_csv(features, labels, 'HOGnhom11.csv')
 
-# Chuẩn hóa dữ liệu HOG
-input_csv_path =  r'E:/Downloads/DATA/Hog/hogtest_hsv/HOGnhom11.csv'
-output_csv_path = r'E:/Downloads/DATA/Hog/hogtest_hsv/HOGnhom11Std.csv'
-standardize_features(input_csv_path, output_csv_path)
+    # Chuẩn hóa dữ liệu HOG
+    input_csv_path =  'HOGnhom11.csv'
+    output_csv_path = 'HOGnhom11Std.csv'
+    standardize_features(input_csv_path, output_csv_path)
+
+save_data()
