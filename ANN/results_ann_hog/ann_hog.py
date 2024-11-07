@@ -9,13 +9,21 @@ import matplotlib.pyplot as plt
 import sys
 import io
 import seaborn as sns
+import os 
+import tensorflow as tf
+import numpy as np
+import random
+random.seed(42)
+np.random.seed(42)
+tf.random.set_seed(42)
 
 # Thiết lập mã hóa để hỗ trợ in ra ký tự Unicode
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 # Bước 1: Tải dữ liệu từ file CSV
-data = pd.read_csv(r'E:/Downloads/DATA/Hog/hogtest_hsv/HOGnhom11Std.csv')
+data = pd.read_csv('Hog\hogtest_hsv\HOGnhom11Std.csv')
 
+os.chdir("ANN/results_ann_hog")
 # Giả sử các cột từ 0 đến n-1 là đặc trưng và cột cuối cùng là nhãn
 X = data.iloc[:, :-1].values  # Các đặc trưng
 y = data.iloc[:, -1].values  # Nhãn
